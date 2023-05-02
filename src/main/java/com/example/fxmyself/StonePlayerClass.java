@@ -9,7 +9,7 @@ public class StonePlayerClass {
 
     private static final StonePlayerClass sp = new StonePlayerClass();
 
-    private StonePlayerClass() {
+    public StonePlayerClass() {
         System.out.println("%");
     }
     public static StonePlayerClass getInstance(){

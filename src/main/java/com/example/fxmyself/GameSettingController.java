@@ -114,15 +114,16 @@ public class GameSettingController {
                 root = FXMLLoader.load(getClass().getResource("GameSettingShow-View.fxml"));
                 Scene scene = new Scene(root);
 
-                //インスタンスを格納
-//                GameSettingShowController nextPageController = new GameSettingShowController();
-//                nextPageController.setInstanceInformation(sg);
+                StoneGameClass sg = new StoneGameClass();
 
-                StoneGameClass.getInstance().setHowManyStone(Integer.parseInt(stoneCountsShow.getText()));
-                StoneGameClass.getInstance().setHowManySteal(Integer.parseInt(stealCountsShow.getText()));
-                StoneGameClass.getInstance().setStoneInitial(stoneInitial.getValue().toString());
+                sg.setHowManyStone(Integer.parseInt(stoneCountsShow.getText()));
+                sg.setHowManySteal(Integer.parseInt(stealCountsShow.getText()));
+                sg.setStoneInitial(stoneInitial.getValue().toString());
                 StonePlayerClass.getInstance().setHowManyPeople(Integer.parseInt(playerCountsShow.getText()));
                 StonePlayerClass.getInstance().setName(playerNames.getText().split(","));
+
+                //インスタンスオブジェクトをシリアライズ化
+                ObjectSerializer.serialize(sg, "Sample.ser");
 
                 // Stageを取得し、新しいSceneをセットする
                 Stage stage = (Stage) goPageToShowAll.getScene().getWindow(); // 現在のStageを取得

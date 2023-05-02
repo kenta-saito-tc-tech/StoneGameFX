@@ -8,15 +8,15 @@ public class StoneGameClass implements App{
     private int howManyStone;
     private String StoneInitial;
     private int howManySteal;
-    private static final StoneGameClass sg = new StoneGameClass();
+    //private static final StoneGameClass sg = new StoneGameClass();
 
-    private StoneGameClass() {
+    public StoneGameClass() {
         System.out.println("!");
     }
-    public static StoneGameClass getInstance(){
-        //new StoneGameClass();
-        return sg;
-    }
+//    public static StoneGameClass getInstance(){
+//        //new StoneGameClass();
+//        return sg;
+//    }
 
     //ゲッター、セッター
     public int getHowManyStone() {

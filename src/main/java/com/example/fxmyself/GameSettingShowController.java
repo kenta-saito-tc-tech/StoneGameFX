@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.WindowEvent;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -39,10 +40,13 @@ public class GameSettingShowController{
     }
 
     @FXML
-    public void initialize() {
-        stoneCountsShow.setText(String.valueOf(StoneGameClass.getInstance().getHowManyStone()));
-        StoneInitialShow.setText(StoneGameClass.getInstance().getStoneInitial());
-        stoneStealShow.setText(String.valueOf(StoneGameClass.getInstance().getHowManySteal()));
+    public void initialize() throws IOException, ClassNotFoundException {
+        //オブジェクトを逆シリアル化して読み込み
+        StoneGameClass deserializedSG = (StoneGameClass) ObjectSerializer.deserialize("Sample.ser");
+
+        stoneCountsShow.setText(String.valueOf(deserializedSG.getHowManyStone()));
+        StoneInitialShow.setText(deserializedSG.getStoneInitial());
+        stoneStealShow.setText(String.valueOf(deserializedSG.getHowManySteal()));
         playerCountsShow.setText(String.valueOf(StonePlayerClass.getInstance().getHowManyPeople()));
 
 //        ObservableList<String> list = FXCollections.observableArrayList();
