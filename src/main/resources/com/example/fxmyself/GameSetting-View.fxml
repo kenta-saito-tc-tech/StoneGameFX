@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxmyself.GameSettingController">
+   <children>
+      <VBox id="gameSetting" alignment="TOP_CENTER" layoutX="100.0" layoutY="71.0" prefHeight="250.0" prefWidth="400.0">
+         <children>
+            <Label text="ゲームの設定画面" textAlignment="CENTER">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="53.0" prefWidth="400.0">
+               <children>
+                  <Label text="石の総数">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="25.0" prefWidth="20.0" />
+                  <ScrollBar fx:id="stoneCounts" nodeOrientation="LEFT_TO_RIGHT" prefHeight="15.0" prefWidth="200.0" />
+                  <Pane layoutX="129.0" layoutY="10.0" prefHeight="25.0" prefWidth="20.0" />
+                  <Label fx:id="stoneCountsShow" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="400.0">
+               <children>
+                  <Label text="石のイニシャル">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="25.0" prefWidth="20.0" />
+                  <ChoiceBox fx:id="stoneInitial" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="53.0" prefWidth="400.0">
+               <children>
+                  <Label text="１度に取れる石の数">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="25.0" prefWidth="20.0" />
+                  <ScrollBar fx:id="stealCounts" max="10.0" min="1.0" prefHeight="15.0" prefWidth="129.0" />
+                  <Pane layoutX="197.0" layoutY="10.0" prefHeight="25.0" prefWidth="20.0" />
+                  <Label fx:id="stealCountsShow" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="400.0">
+               <children>
+                  <Label text="参加人数">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="25.0" prefWidth="20.0" />
+                  <ScrollBar fx:id="playerCounts" max="10.0" min="2.0" />
+                  <Pane layoutX="180.0" layoutY="10.0" prefHeight="25.0" prefWidth="20.0" />
+                  <Label fx:id="playerCountsShow" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="PLAYER名">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="25.0" prefWidth="20.0" />
+                  <TextArea fx:id="playerNames" prefHeight="200.0" prefWidth="200.0" promptText="（例）saito,goto,sato,kato" />
+               </children>
+            </HBox>
+            <Pane prefHeight="47.0" prefWidth="400.0" />
+            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="400.0">
+               <children>
+                  <Button fx:id="backPageToMain" onAction="#onButtonClickToMain" mnemonicParsing="false" text="戻る" />
+                  <Pane prefHeight="62.0" prefWidth="55.0" />
+                  <Button fx:id="goPageToShowAll" onAction="#onButtonClickToShow" mnemonicParsing="false" text="進む" />
+               </children>
+            </HBox>
+         </children></VBox>
+   </children>
+</AnchorPane>

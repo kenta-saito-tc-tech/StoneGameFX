@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxmyself.GameSettingShowController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Label text="ゲーム設定内容">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0">
+               <children>
+                  <Label text="石の総数">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="13.0" prefWidth="28.0" />
+                  <Label fx:id="stoneCountsShow" />
+               </children>
+            </HBox>
+            <Label fx:id="StoneInitialShow">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="49.0" prefWidth="600.0">
+               <children>
+                  <Label text="一度に盗める石の数">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="88.0" prefWidth="29.0" />
+                  <Label fx:id="stoneStealShow" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="51.0" prefWidth="600.0">
+               <children>
+                  <Label text="参加人数">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="97.0" prefWidth="29.0" />
+                  <Label fx:id="playerCountsShow" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="PLAYER一覧">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="100.0" prefWidth="30.0" />
+                  <ListView fx:id="playerNamesShow" prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="backToSettingButton" onAction="#onButtonClickBack" mnemonicParsing="false" text="設定に戻る" />
+                  <Pane prefHeight="100.0" prefWidth="48.0" />
+                  <Button fx:id="gameStartButton" onAction="#onButtonClickStart" mnemonicParsing="false" text="ゲーム開始" />
+               </children>
+            </HBox>
+         </children></VBox>
+   </children>
+</AnchorPane>
