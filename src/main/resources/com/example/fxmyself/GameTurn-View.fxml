@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxmyself.GameTurnController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="399.0" prefWidth="600.0">
+         <children>
+            <Label fx:id="playerTurn" text="player名">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <Label fx:id="stoneCounts" text="石の数">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="stoneInitial" text="\@@@@@@@@@@@" />
+            <HBox alignment="CENTER" prefHeight="41.0" prefWidth="600.0">
+               <children>
+                  <Label text="取る石の数" />
+                  <Pane prefHeight="41.0" prefWidth="16.0" />
+                  <ScrollBar fx:id="scrollBar" min="1.0" />
+                  <Label fx:id="StealCounts" />
+               </children>
+            </HBox>
+            <Button fx:id="myTurnEnd" onAction="#myTurnEndBtn" mnemonicParsing="false" text="決定" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

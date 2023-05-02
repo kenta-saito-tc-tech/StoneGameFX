@@ -3,18 +3,17 @@ package com.example.fxmyself;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.stage.WindowEvent;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class GameSettingShowController implements Serializable {
 
@@ -29,14 +28,7 @@ public class GameSettingShowController implements Serializable {
     @FXML
     private ListView playerNamesShow;
     @FXML
-    private Button backToSettingButton;
-    @FXML
     private Button gameStartButton;
-
-    @FXML
-    public void gameSettingShow(){
-
-    }
 
     @FXML
     public void initialize() {
@@ -50,18 +42,19 @@ public class GameSettingShowController implements Serializable {
      */
     @FXML
     private void onButtonClickStart(ActionEvent event) {
-        // ボタンがクリックされたときに実行される処理
-        // ...
-    }
+        Parent root = null;
+        try {
+            // FXMLファイルをロードして新しいSceneを作成する
+            root = FXMLLoader.load(getClass().getResource("GameTurn-View.fxml"));
+            Scene scene = new Scene(root);
 
-    /**
-     * 設定に戻るボタンが押されたときの処理
-     * @param event
-     */
-    @FXML
-    private void onButtonClickBack(ActionEvent event){
-        // ボタンがクリックされたときに実行される処理
-
+            // Stageを取得し、新しいSceneをセットする
+            Stage stage = (Stage) gameStartButton.getScene().getWindow(); // 現在のStageを取得
+            stage.setScene(scene); // 新しいSceneをセットする
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -77,9 +70,16 @@ public class GameSettingShowController implements Serializable {
         StonePlayerClass deserializedSP = (StonePlayerClass) ObjectSerializer.deserialize("sampleSP.ser");
 
         stoneCountsShow.setText(String.valueOf(deserializedSG.getHowManyStone()));
-        StoneInitialShow.setText(deserializedSG.getStoneInitial());
+
+        StringBuilder sb = new StringBuilder(); // StringBuilderオブジェクトを作成
+        String result = sb.toString(); // StringBuilderオブジェクトをString型に変換
+        for(int i = 0; i < deserializedSG.getHowManyStone(); i++){
+            sb.append(deserializedSG.getStoneInitial());
+        }
+        StoneInitialShow.setText(String.valueOf(sb));
+
         stoneStealShow.setText(String.valueOf(deserializedSG.getHowManySteal()));
-        playerCountsShow.setText(String.valueOf(deserializedSP.getHowManyPeople()));
+        playerCountsShow.setText(String.valueOf(deserializedSP.getName().length));
 
         ObservableList<String> list = FXCollections.observableArrayList();
         list.addAll(deserializedSP.getName());

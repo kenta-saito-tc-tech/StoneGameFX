@@ -8,12 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.ScrollEvent;
 import javafx.stage.Stage;
-
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 public class GameSettingController {
     private double value;
@@ -43,8 +39,6 @@ public class GameSettingController {
     private TextArea playerNames;
     //ボタン
     @FXML
-    private Button backPageToMain;
-    @FXML
     private Button goPageToShowAll;
 
     /**
@@ -53,14 +47,14 @@ public class GameSettingController {
     @FXML
     public void initialize() {
         stoneCounts.valueProperty().addListener((observable, oldValue, newValue) -> {
-            stoneCountsShow.setText(String.valueOf(initializeForScrollBar(stoneCounts)));
+            stoneCountsShow.setText(String.valueOf(initializeForScrollBar(stoneCounts) +1));
         });
         stealCounts.valueProperty().addListener((observable, oldValue, newValue) -> {
-            stealCountsShow.setText(String.valueOf(initializeForScrollBar(stealCounts)));
+            stealCountsShow.setText(String.valueOf(initializeForScrollBar(stealCounts) +1));
         });
 
         playerCounts.valueProperty().addListener((observable, oldValue, newValue) -> {
-            playerCountsShow.setText(String.valueOf(initializeForScrollBar(playerCounts)));
+            playerCountsShow.setText(String.valueOf(initializeForScrollBar(playerCounts) +1));
         });
 
         ObservableList<String> list = FXCollections.observableArrayList("*", "%", "&", "$","￥");
@@ -127,16 +121,6 @@ public class GameSettingController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
         }
-    }
-
-    /**
-     * 戻るボタンが押されたときの処理
-     * @param event
-     */
-    @FXML
-    private void onButtonClickToMain(ActionEvent event) {
-        // ボタンがクリックされたときに実行される処理
-        // ...
     }
 
 }

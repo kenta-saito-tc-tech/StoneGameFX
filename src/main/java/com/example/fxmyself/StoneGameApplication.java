@@ -27,7 +27,7 @@ public class StoneGameApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader =
-                new FXMLLoader(StoneGameApplication.class.getResource("GameSetting-View.fxml"));
+                new FXMLLoader(StoneGameApplication.class.getResource("GameStart-View.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 300, 275);
         primaryStage.setTitle("StoneGame");
         primaryStage.setScene(scene);
