@@ -13,6 +13,7 @@
                   <Font size="27.0" />
                </font>
             </Label>
+            <Button fx:id="buttonShow" onAction="#onButtonShow" mnemonicParsing="false" prefHeight="25.0" prefWidth="325.0" text="内容取得" />
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0">
                <children>
                   <Label text="石の総数">
@@ -64,9 +65,9 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="backToSettingButton" onAction="#onButtonClickBack" mnemonicParsing="false" text="設定に戻る" />
+                  <Button fx:id="backToSettingButton" mnemonicParsing="false" onAction="#onButtonClickBack" text="設定に戻る" />
                   <Pane prefHeight="100.0" prefWidth="48.0" />
-                  <Button fx:id="gameStartButton" onAction="#onButtonClickStart" mnemonicParsing="false" text="ゲーム開始" />
+                  <Button fx:id="gameStartButton" mnemonicParsing="false" onAction="#onButtonClickStart" text="ゲーム開始" />
                </children>
             </HBox>
          </children></VBox>

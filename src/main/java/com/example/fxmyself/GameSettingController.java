@@ -11,22 +11,14 @@ import javafx.scene.control.*;
 import javafx.scene.input.ScrollEvent;
 import javafx.stage.Stage;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class GameSettingController {
     private double value;
     private String str;
 
-    //private static StoneGameClass sg = new StoneGameClass();
-    //private static StonePlayerClass sp = new StonePlayerClass();
-
-//    public static StoneGameClass getSg() {
-//        return sg;
-//    }
-
-//    public static StonePlayerClass getSp() {
-//        return sp;
-//    }
 
     //石の総数
     @FXML
@@ -114,15 +106,19 @@ public class GameSettingController {
                 root = FXMLLoader.load(getClass().getResource("GameSettingShow-View.fxml"));
                 Scene scene = new Scene(root);
 
-                //オブジェクトを逆シリアル化して読み込み
-                StoneGameClass deserializedSG = (StoneGameClass) ObjectSerializer.deserialize("sampleSG.ser");
-                StonePlayerClass deserializedSP = (StonePlayerClass) ObjectSerializer.deserialize("sampleSP.ser");
+                StoneGameClass sg = new StoneGameClass();
+                StonePlayerClass sp = new StonePlayerClass();
 
-                deserializedSG.setHowManyStone(Integer.parseInt(stoneCountsShow.getText()));
-                deserializedSG.setHowManySteal(Integer.parseInt(stealCountsShow.getText()));
-                deserializedSG.setStoneInitial(stoneInitial.getValue().toString());
-                deserializedSP.setHowManyPeople(Integer.parseInt(playerCountsShow.getText()));
-                deserializedSP.setName(playerNames.getText().split(","));
+                sg.setHowManyStone(Integer.parseInt(stoneCountsShow.getText()));
+                sg.setHowManySteal(Integer.parseInt(stealCountsShow.getText()));
+                sg.setStoneInitial(stoneInitial.getValue().toString());
+                sp.setHowManyPeople(Integer.parseInt(playerCountsShow.getText()));
+                sp.setName(playerNames.getText().split(","));
+
+                ObjectSerializer.getOos().writeObject(sg);
+                ObjectSerializer.getOos().close();
+                ObjectSerializer.getOos2().writeObject(sp);
+                ObjectSerializer.getOos2().close();
 
                 // Stageを取得し、新しいSceneをセットする
                 Stage stage = (Stage) goPageToShowAll.getScene().getWindow(); // 現在のStageを取得
@@ -130,11 +126,7 @@ public class GameSettingController {
                 stage.show();
             } catch (IOException e) {
                 throw new RuntimeException(e);
-
-        } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-        ;
+        }
     }
 
     /**

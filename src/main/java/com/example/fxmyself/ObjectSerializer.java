@@ -3,17 +3,25 @@ package com.example.fxmyself;
 import java.io.*;
 
 public class ObjectSerializer {
-    public static void serialize(Object obj, String filename) throws IOException {
-        // FileOutputStreamを作成する
-        FileOutputStream fos = new FileOutputStream(filename);
 
-        // ObjectOutputStreamを作成する
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
+    // ObjectOutputStreamを作成する
+    static ObjectOutputStream oos;
+    static ObjectOutputStream oos2;
 
-        // ObjectOutputStreamのwriteObjectメソッドを使用して、シリアライズ対象のオブジェクトをファイルに書き込む
-        oos.writeObject(obj);
-        oos.close();
-        //fos.close();
+    public static void setOos(ObjectOutputStream oos) {
+        ObjectSerializer.oos = oos;
+    }
+
+    public static void setOos2(ObjectOutputStream oos2) {
+        ObjectSerializer.oos2 = oos2;
+    }
+
+    public static ObjectOutputStream getOos() {
+        return oos;
+    }
+
+    public static ObjectOutputStream getOos2() {
+        return oos2;
     }
 
     public static Object deserialize(String filename) throws IOException, ClassNotFoundException {

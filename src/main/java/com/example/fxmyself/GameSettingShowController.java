@@ -12,12 +12,11 @@ import javafx.scene.control.ListView;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GameSettingShowController{
-
-//    private StoneGameClass instanceInformationSG;
+public class GameSettingShowController implements Serializable {
 
     @FXML
     private Label stoneCountsShow;
@@ -40,21 +39,9 @@ public class GameSettingShowController{
     }
 
     @FXML
-    public void initialize() throws IOException, ClassNotFoundException {
-        //オブジェクトを逆シリアル化して読み込み
-        StoneGameClass deserializedSG = (StoneGameClass) ObjectSerializer.deserialize("sample.ser");
-        StonePlayerClass deserializedSP = (StonePlayerClass) ObjectSerializer.deserialize("sampleSP.ser");
-
-        stoneCountsShow.setText(String.valueOf(deserializedSG.getHowManyStone()));
-        StoneInitialShow.setText(deserializedSG.getStoneInitial());
-        stoneStealShow.setText(String.valueOf(deserializedSG.getHowManySteal()));
-        playerCountsShow.setText(String.valueOf(deserializedSP.getHowManyPeople()));
-
-//        ObservableList<String> list = FXCollections.observableArrayList();
-//        list.addAll(StonePlayerClass.getInstance().getName());
-//        playerNamesShow.setItems(list);
+    public void initialize() {
+        //
     }
-    //todo textにシリアライズしてインスタンスのオブジェクトを使いまわす
 
 
     /**
@@ -72,17 +59,30 @@ public class GameSettingShowController{
      * @param event
      */
     @FXML
-    private void onButtonClickBack(ActionEvent event) {
+    private void onButtonClickBack(ActionEvent event){
         // ボタンがクリックされたときに実行される処理
-        // ...
+
     }
 
-//    //インスタンスの格納用
-//    public void setInstanceInformation(StoneGameClass instanceInformation) {
-//        this.instanceInformationSG = instanceInformation;
-//    }
-//
-//    public StoneGameClass getInstanceInformation() {
-//        return instanceInformationSG;
-//    }
+    /**
+     * 設定内容の取得
+     * @param event
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    @FXML
+    private void onButtonShow(ActionEvent event) throws IOException, ClassNotFoundException {
+        //オブジェクトを逆シリアル化して読み込み
+        StoneGameClass deserializedSG = (StoneGameClass) ObjectSerializer.deserialize("sampleSG.ser");
+        StonePlayerClass deserializedSP = (StonePlayerClass) ObjectSerializer.deserialize("sampleSP.ser");
+
+        stoneCountsShow.setText(String.valueOf(deserializedSG.getHowManyStone()));
+        StoneInitialShow.setText(deserializedSG.getStoneInitial());
+        stoneStealShow.setText(String.valueOf(deserializedSG.getHowManySteal()));
+        playerCountsShow.setText(String.valueOf(deserializedSP.getHowManyPeople()));
+
+        ObservableList<String> list = FXCollections.observableArrayList();
+        list.addAll(deserializedSP.getName());
+        playerNamesShow.setItems(list);
+    }
 }
