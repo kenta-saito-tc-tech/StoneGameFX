@@ -45,7 +45,7 @@
                      </font>
                   </Label>
                   <Pane prefHeight="25.0" prefWidth="20.0" />
-                  <ScrollBar fx:id="stealCounts" max="10.0" min="1.0" prefHeight="15.0" prefWidth="129.0" />
+                  <ScrollBar fx:id="stealCounts" max="10.0" prefHeight="15.0" prefWidth="129.0" />
                   <Pane layoutX="197.0" layoutY="10.0" prefHeight="25.0" prefWidth="20.0" />
                   <Label fx:id="stealCountsShow" />
                </children>
@@ -58,7 +58,7 @@
                      </font>
                   </Label>
                   <Pane prefHeight="25.0" prefWidth="20.0" />
-                  <ScrollBar fx:id="playerCounts" max="10.0" min="2.0" />
+                  <ScrollBar fx:id="playerCounts" max="10.0" min="1.0" />
                   <Pane layoutX="180.0" layoutY="10.0" prefHeight="25.0" prefWidth="20.0" />
                   <Label fx:id="playerCountsShow" />
                </children>
@@ -77,9 +77,7 @@
             <Pane prefHeight="47.0" prefWidth="400.0" />
             <HBox alignment="CENTER" prefHeight="54.0" prefWidth="400.0">
                <children>
-                  <Button fx:id="backPageToMain" onAction="#onButtonClickToMain" mnemonicParsing="false" text="戻る" />
-                  <Pane prefHeight="62.0" prefWidth="55.0" />
-                  <Button fx:id="goPageToShowAll" onAction="#onButtonClickToShow" mnemonicParsing="false" text="進む" />
+                  <Button fx:id="goPageToShowAll" mnemonicParsing="false" onAction="#onButtonClickToShow" text="進む" />
                </children>
             </HBox>
          </children></VBox>

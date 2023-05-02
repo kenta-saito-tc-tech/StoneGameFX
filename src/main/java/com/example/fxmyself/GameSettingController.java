@@ -8,25 +8,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.ScrollEvent;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class GameSettingController {
     private double value;
     private String str;
 
-    //private static StoneGameClass sg = new StoneGameClass();
-    //private static StonePlayerClass sp = new StonePlayerClass();
-
-//    public static StoneGameClass getSg() {
-//        return sg;
-//    }
-
-//    public static StonePlayerClass getSp() {
-//        return sp;
-//    }
 
     //石の総数
     @FXML
@@ -51,8 +39,6 @@ public class GameSettingController {
     private TextArea playerNames;
     //ボタン
     @FXML
-    private Button backPageToMain;
-    @FXML
     private Button goPageToShowAll;
 
     /**
@@ -61,14 +47,14 @@ public class GameSettingController {
     @FXML
     public void initialize() {
         stoneCounts.valueProperty().addListener((observable, oldValue, newValue) -> {
-            stoneCountsShow.setText(String.valueOf(initializeForScrollBar(stoneCounts)));
+            stoneCountsShow.setText(String.valueOf(initializeForScrollBar(stoneCounts) +1));
         });
         stealCounts.valueProperty().addListener((observable, oldValue, newValue) -> {
-            stealCountsShow.setText(String.valueOf(initializeForScrollBar(stealCounts)));
+            stealCountsShow.setText(String.valueOf(initializeForScrollBar(stealCounts) +1));
         });
 
         playerCounts.valueProperty().addListener((observable, oldValue, newValue) -> {
-            playerCountsShow.setText(String.valueOf(initializeForScrollBar(playerCounts)));
+            playerCountsShow.setText(String.valueOf(initializeForScrollBar(playerCounts) +1));
         });
 
         ObservableList<String> list = FXCollections.observableArrayList("*", "%", "&", "$","￥");
@@ -114,15 +100,19 @@ public class GameSettingController {
                 root = FXMLLoader.load(getClass().getResource("GameSettingShow-View.fxml"));
                 Scene scene = new Scene(root);
 
-                //インスタンスを格納
-//                GameSettingShowController nextPageController = new GameSettingShowController();
-//                nextPageController.setInstanceInformation(sg);
+                StoneGameClass sg = new StoneGameClass();
+                StonePlayerClass sp = new StonePlayerClass();
 
-                StoneGameClass.getInstance().setHowManyStone(Integer.parseInt(stoneCountsShow.getText()));
-                StoneGameClass.getInstance().setHowManySteal(Integer.parseInt(stealCountsShow.getText()));
-                StoneGameClass.getInstance().setStoneInitial(stoneInitial.getValue().toString());
-                StonePlayerClass.getInstance().setHowManyPeople(Integer.parseInt(playerCountsShow.getText()));
-                StonePlayerClass.getInstance().setName(playerNames.getText().split(","));
+                sg.setHowManyStone(Integer.parseInt(stoneCountsShow.getText()));
+                sg.setHowManySteal(Integer.parseInt(stealCountsShow.getText()));
+                sg.setStoneInitial(stoneInitial.getValue().toString());
+                sp.setHowManyPeople(Integer.parseInt(playerCountsShow.getText()));
+                sp.setName(playerNames.getText().split(","));
+
+                ObjectSerializer.getOos().writeObject(sg);
+                ObjectSerializer.getOos().close();
+                ObjectSerializer.getOos2().writeObject(sp);
+                ObjectSerializer.getOos2().close();
 
                 // Stageを取得し、新しいSceneをセットする
                 Stage stage = (Stage) goPageToShowAll.getScene().getWindow(); // 現在のStageを取得
@@ -130,18 +120,7 @@ public class GameSettingController {
                 stage.show();
             } catch (IOException e) {
                 throw new RuntimeException(e);
-
-        };
-    }
-
-    /**
-     * 戻るボタンが押されたときの処理
-     * @param event
-     */
-    @FXML
-    private void onButtonClickToMain(ActionEvent event) {
-        // ボタンがクリックされたときに実行される処理
-        // ...
+        }
     }
 
 }

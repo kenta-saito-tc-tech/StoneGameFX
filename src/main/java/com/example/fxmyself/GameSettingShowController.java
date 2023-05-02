@@ -3,20 +3,19 @@ package com.example.fxmyself;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.stage.WindowEvent;
+import javafx.stage.Stage;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.IOException;
+import java.io.Serializable;
 
-public class GameSettingShowController{
-
-//    private StoneGameClass instanceInformationSG;
+public class GameSettingShowController implements Serializable {
 
     @FXML
     private Label stoneCountsShow;
@@ -29,27 +28,12 @@ public class GameSettingShowController{
     @FXML
     private ListView playerNamesShow;
     @FXML
-    private Button backToSettingButton;
-    @FXML
     private Button gameStartButton;
 
     @FXML
-    public void gameSettingShow(){
-
-    }
-
-    @FXML
     public void initialize() {
-        stoneCountsShow.setText(String.valueOf(StoneGameClass.getInstance().getHowManyStone()));
-        StoneInitialShow.setText(StoneGameClass.getInstance().getStoneInitial());
-        stoneStealShow.setText(String.valueOf(StoneGameClass.getInstance().getHowManySteal()));
-        playerCountsShow.setText(String.valueOf(StonePlayerClass.getInstance().getHowManyPeople()));
-
-//        ObservableList<String> list = FXCollections.observableArrayList();
-//        list.addAll(StonePlayerClass.getInstance().getName());
-//        playerNamesShow.setItems(list);
+        //
     }
-    //todo textにシリアライズしてインスタンスのオブジェクトを使いまわす
 
 
     /**
@@ -58,26 +42,47 @@ public class GameSettingShowController{
      */
     @FXML
     private void onButtonClickStart(ActionEvent event) {
-        // ボタンがクリックされたときに実行される処理
-        // ...
+        Parent root = null;
+        try {
+            // FXMLファイルをロードして新しいSceneを作成する
+            root = FXMLLoader.load(getClass().getResource("GameTurn-View.fxml"));
+            Scene scene = new Scene(root);
+
+            // Stageを取得し、新しいSceneをセットする
+            Stage stage = (Stage) gameStartButton.getScene().getWindow(); // 現在のStageを取得
+            stage.setScene(scene); // 新しいSceneをセットする
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
-     * 設定に戻るボタンが押されたときの処理
+     * 設定内容の取得
      * @param event
+     * @throws IOException
+     * @throws ClassNotFoundException
      */
     @FXML
-    private void onButtonClickBack(ActionEvent event) {
-        // ボタンがクリックされたときに実行される処理
-        // ...
-    }
+    private void onButtonShow(ActionEvent event) throws IOException, ClassNotFoundException {
+        //オブジェクトを逆シリアル化して読み込み
+        StoneGameClass deserializedSG = (StoneGameClass) ObjectSerializer.deserialize("sampleSG.ser");
+        StonePlayerClass deserializedSP = (StonePlayerClass) ObjectSerializer.deserialize("sampleSP.ser");
 
-//    //インスタンスの格納用
-//    public void setInstanceInformation(StoneGameClass instanceInformation) {
-//        this.instanceInformationSG = instanceInformation;
-//    }
-//
-//    public StoneGameClass getInstanceInformation() {
-//        return instanceInformationSG;
-//    }
+        stoneCountsShow.setText(String.valueOf(deserializedSG.getHowManyStone()));
+
+        StringBuilder sb = new StringBuilder(); // StringBuilderオブジェクトを作成
+        String result = sb.toString(); // StringBuilderオブジェクトをString型に変換
+        for(int i = 0; i < deserializedSG.getHowManyStone(); i++){
+            sb.append(deserializedSG.getStoneInitial());
+        }
+        StoneInitialShow.setText(String.valueOf(sb));
+
+        stoneStealShow.setText(String.valueOf(deserializedSG.getHowManySteal()));
+        playerCountsShow.setText(String.valueOf(deserializedSP.getName().length));
+
+        ObservableList<String> list = FXCollections.observableArrayList();
+        list.addAll(deserializedSP.getName());
+        playerNamesShow.setItems(list);
+    }
 }
