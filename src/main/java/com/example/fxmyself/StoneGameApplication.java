@@ -28,7 +28,7 @@ public class StoneGameApplication extends Application {
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader =
                 new FXMLLoader(StoneGameApplication.class.getResource("GameStart-View.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 300, 275);
+        Scene scene = new Scene(fxmlLoader.load());
         primaryStage.setTitle("StoneGame");
         primaryStage.setScene(scene);
         primaryStage.show();
