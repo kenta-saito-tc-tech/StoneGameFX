@@ -18,7 +18,6 @@ public class StoneGameApplication extends Application {
         // ObjectOutputStreamを作成する
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         ObjectOutputStream oos2 = new ObjectOutputStream(fos2);
-
         ObjectSerializer.setOos(oos);
         ObjectSerializer.setOos2(oos2);
         launch(args);
