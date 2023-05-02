@@ -42,12 +42,13 @@ public class GameSettingShowController{
     @FXML
     public void initialize() throws IOException, ClassNotFoundException {
         //オブジェクトを逆シリアル化して読み込み
-        StoneGameClass deserializedSG = (StoneGameClass) ObjectSerializer.deserialize("Sample.ser");
+        StoneGameClass deserializedSG = (StoneGameClass) ObjectSerializer.deserialize("sample.ser");
+        StonePlayerClass deserializedSP = (StonePlayerClass) ObjectSerializer.deserialize("sampleSP.ser");
 
         stoneCountsShow.setText(String.valueOf(deserializedSG.getHowManyStone()));
         StoneInitialShow.setText(deserializedSG.getStoneInitial());
         stoneStealShow.setText(String.valueOf(deserializedSG.getHowManySteal()));
-        playerCountsShow.setText(String.valueOf(StonePlayerClass.getInstance().getHowManyPeople()));
+        playerCountsShow.setText(String.valueOf(deserializedSP.getHowManyPeople()));
 
 //        ObservableList<String> list = FXCollections.observableArrayList();
 //        list.addAll(StonePlayerClass.getInstance().getName());

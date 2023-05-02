@@ -1,9 +1,10 @@
 package com.example.fxmyself;
 
+import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class StoneGameClass implements App{
+public class StoneGameClass implements App, Serializable {
     //フィールド
     private int howManyStone;
     private String StoneInitial;

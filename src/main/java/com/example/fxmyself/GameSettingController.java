@@ -114,16 +114,15 @@ public class GameSettingController {
                 root = FXMLLoader.load(getClass().getResource("GameSettingShow-View.fxml"));
                 Scene scene = new Scene(root);
 
-                StoneGameClass sg = new StoneGameClass();
+                //オブジェクトを逆シリアル化して読み込み
+                StoneGameClass deserializedSG = (StoneGameClass) ObjectSerializer.deserialize("sampleSG.ser");
+                StonePlayerClass deserializedSP = (StonePlayerClass) ObjectSerializer.deserialize("sampleSP.ser");
 
-                sg.setHowManyStone(Integer.parseInt(stoneCountsShow.getText()));
-                sg.setHowManySteal(Integer.parseInt(stealCountsShow.getText()));
-                sg.setStoneInitial(stoneInitial.getValue().toString());
-                StonePlayerClass.getInstance().setHowManyPeople(Integer.parseInt(playerCountsShow.getText()));
-                StonePlayerClass.getInstance().setName(playerNames.getText().split(","));
-
-                //インスタンスオブジェクトをシリアライズ化
-                ObjectSerializer.serialize(sg, "Sample.ser");
+                deserializedSG.setHowManyStone(Integer.parseInt(stoneCountsShow.getText()));
+                deserializedSG.setHowManySteal(Integer.parseInt(stealCountsShow.getText()));
+                deserializedSG.setStoneInitial(stoneInitial.getValue().toString());
+                deserializedSP.setHowManyPeople(Integer.parseInt(playerCountsShow.getText()));
+                deserializedSP.setName(playerNames.getText().split(","));
 
                 // Stageを取得し、新しいSceneをセットする
                 Stage stage = (Stage) goPageToShowAll.getScene().getWindow(); // 現在のStageを取得
@@ -132,7 +131,10 @@ public class GameSettingController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
 
-        };
+        } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        ;
     }
 
     /**

@@ -1,20 +1,15 @@
 package com.example.fxmyself;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class StonePlayerClass {
+public class StonePlayerClass implements Serializable {
     //フィールド
     private String[] name;
     private int howManyPeople;
 
-    private static final StonePlayerClass sp = new StonePlayerClass();
-
     public StonePlayerClass() {
         System.out.println("%");
-    }
-    public static StonePlayerClass getInstance(){
-        //new StoneGameClass();
-        return sp;
     }
 
     //ゲッター、セッター

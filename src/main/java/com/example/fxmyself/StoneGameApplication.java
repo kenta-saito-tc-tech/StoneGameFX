@@ -9,7 +9,13 @@ import java.io.IOException;
 
 public class StoneGameApplication extends Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        StoneGameClass sg = new StoneGameClass();
+        StonePlayerClass sp = new StonePlayerClass();
+        //インスタンスオブジェクトをシリアライズ化
+        ObjectSerializer.serialize(sg, "sampleSG.ser");
+        ObjectSerializer.serialize(sp, "sampleSP.ser");
+
         launch(args);
     }
 
